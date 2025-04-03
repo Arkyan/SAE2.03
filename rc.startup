@@ -3,3 +3,7 @@ ip address add 172.22.191.254/20 dev eth1
 
 ip link set dev eth0 up
 ip link set dev eth1 up
+
+ip route add default via 10.0.1.1
+
+iptables -tnat -A POSTROUTING -o eth0 -j MASQUERADE
