@@ -5,5 +5,3 @@ ip link set dev eth0 up
 ip link set dev eth1 up
 
 ip route add default via 10.0.2.1
-
-iptables -tnat -A POSTROUTING -o eth0 -j MASQUERADE
