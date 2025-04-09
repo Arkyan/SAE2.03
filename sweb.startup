@@ -3,3 +3,5 @@ ip link set dev eth0 up
 
 ip route add default via 192.168.90.125
 ip route add 192.168.90.128/25 via 192.168.90.126
+
+echo "nameserver 8.8.8.8" > /etc/resolv.conf

@@ -7,8 +7,10 @@ ip link set dev eth1 up
 ip link set dev eth2 up
 
 ip route add 192.168.90.0/25 via 10.0.3.2
-ip route add 172.22.160.0/20 via 10.0.2.2
-ip route add 172.22.176.0/20 via 10.0.1.2
+ip route add 172.22.160.0/21 via 10.0.2.2
+ip route add 172.22.168.0/21 via 10.0.1.2
 ip route add 192.168.90.128/25 via 10.0.3.2
 
 iptables -t nat -A POSTROUTING -o eth3 -j MASQUERADE
+
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
