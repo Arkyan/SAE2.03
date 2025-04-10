@@ -8,8 +8,26 @@ ip route add default via 10.0.1.1
 
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
-apt update
-DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::="--force-confold" isc-dhcp-server
-service isc-dhcp-server restart
 
+rm -f /etc/dhcp/dhcpd.conf
+dpkg --configure -a
+
+apt update -y && apt upgrade -y
+
+DEBIAN_FRONTEND=noninteractive apt install -y isc-dhcp-server
+
+echo "ddns-update-style none;
+
+subnet 172.22.168.0 netmask 255.255.248.0
+{
+            range 172.22.168.1     172.22.171.115;
+            option routers 172.22.175.254;
+}
+
+host rc{
+          hardware ethernet aa:bb:cc:dd:ee:fb;
+          fixed-address 172.22.175.254;
+}" >> /etc/dhcp/dhcpd.conf
+
+service isc-dhcp-server restart
 
