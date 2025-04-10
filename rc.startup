@@ -6,9 +6,10 @@ ip link set dev eth1 up
 
 ip route add default via 10.0.1.1
 
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
+
 apt update
 DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::="--force-confold" isc-dhcp-server
-
 service isc-dhcp-server restart
 
-echo "nameserver 8.8.8.8" > /etc/resolv.conf
+
