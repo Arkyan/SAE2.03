@@ -1,1 +1,5 @@
-dhclient eth0
+# Script bash qui demande un adressage sur dhclient eth0 jusqu'à ce qu'il ressoive son adresse
+while ! ip addr show eth0 | grep -q "inet "; do
+    dhclient eth0
+    sleep 5
+done
